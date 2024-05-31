@@ -6,6 +6,7 @@ const userSchema = new Schema({
   full_name: String,
   password: String,
   createdAt: Date,
+  pokemons:Array,
   updatedAt: Date
 });
 

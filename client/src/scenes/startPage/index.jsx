@@ -25,18 +25,28 @@ const StartPage = ({ player }) => {
   }, [userDetail])
 
   const handleSavePlayerDeck = () => {
-    const reducedData = playerCardDeck.map((pokemon) => {
-      return
-      { name: pokemon.name, { current_health: pokemon.hp, experience: pokemon.experience } }
-    })
+    console.log('hi there')
+    console.log(playerCardDeck)
 
+    const reducedData=[]
+for (const pokemon of playerCardDeck) {
+  reducedData.push({name: pokemon.name, current_health: pokemon.hp, experience: pokemon.experience})
+    //   [{ name: pokemon.name,  
+    //   [{ name: pokemon.name,  })
+
+}
+
+    // const reducedData = playerCardDeck.map((pokemon) => {
+      
+    //   [{ name: pokemon.name,  current_health: pokemon.hp, experience: pokemon.experience  }]
+    // })
     const data = {
       user_id: userDetail.id,
       pokemons: [...reducedData],
     }
     console.log(data)
-    fetch('/api/collection', {
-      method: 'POST',
+    fetch('/api/user/deck', {
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
@@ -75,7 +85,7 @@ const StartPage = ({ player }) => {
           </div>
           {!isDeckSaved ? (
             <button
-              onClick={() => handleSavePlayerDeck}
+              onClick={() => handleSavePlayerDeck()}
               className='savebutton text-xl w-[12vw] min-w-[72px] bg-green border-black border hover:bg-dirty-green p-1 m-1 text-amber-50 max-h-[40px] min-h-[36px] rounded-2xl'
             >
               Save Deck

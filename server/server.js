@@ -15,7 +15,8 @@ app.post('/api/user', async (req, res) => {
   const full_name = req.body.full_name
   const user_name = req.body.user_name
   const password = req.body.password
-  const pokemons_url = `/api/collection/${user_name.toLowerCase()}`
+  // const pokemons_url = `/api/collection/${user_name.toLowerCase()}`
+  const pokemons=[]
   const createdAt = Date.now()
   const userCheck = await User.findOne({ user_name: user_name })
   if (userCheck) {
@@ -26,7 +27,7 @@ app.post('/api/user', async (req, res) => {
       user_name,
       password,
       createdAt,
-      pokemons_url,
+     pokemons
     })
     user
       .save()
@@ -35,11 +36,16 @@ app.post('/api/user', async (req, res) => {
   }
 })
 
-app.patch('/api/user/deck', (req, res) => {
+app.patch('/api/user/deck', async (req, res) => {
   try {
     const user_id = req.body.user_id
     const pokemons = req.body.pokemons
-    res.send({ user_id: user_id, pokemons: pokemons })
+
+    const updatedUser = await User.findOneAndUpdate(
+    { user_id: user_id },
+    {pokemons: pokemons},
+    { new: true, runValidators: true })
+    console.log(updatedUser)
   } catch (error) {
     console.log(err)
     res.status(500).json({ message: 'unlucky' })
