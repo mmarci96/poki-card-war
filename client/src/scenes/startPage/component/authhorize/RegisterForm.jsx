@@ -1,4 +1,7 @@
-const RegisterForm = ({ onSingUpSuccesfull, onHaveAccount }) => {
+
+
+const RegisterForm = ({ onSingUpSuccesfull, onHaveAccount, isLogged }) => {
+  
   const handleRegister = async (e) => {
     e.preventDefault()
     const fullName = e.target[0].value
@@ -25,6 +28,7 @@ const RegisterForm = ({ onSingUpSuccesfull, onHaveAccount }) => {
   }
 
   return (
+    !isLogged && 
     <form
       className='max-w-1/2 min-w-[160px] flex flex-col justify-center p-2 m-4 bg-light bg-opacity-50  h-[40vh] min-h-[420px] mt-32'
       onSubmit={handleRegister}
