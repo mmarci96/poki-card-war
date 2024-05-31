@@ -1,0 +1,160 @@
+/* Card */
+.card-pokemon-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  max-height: 330px;
+  background-color: rgba(206, 206, 206, 0.598);
+  border: 2px solid #000000;
+  border-radius: 10px;
+  transition: 0.2s ease-in;
+  margin: 10px;
+  padding: 10px;
+  line-height: 0.9;
+}
+
+/*Base Stat*/
+.card-type-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 5px;
+  margin-top: 0;
+}
+.card-base-hp {
+  background-color: rgb(250, 251, 255);
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid gray;
+}
+.card-type-name {
+  background-color: rgb(250, 251, 255);
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 20px;
+}
+
+/* Splash-art and name */
+.card-poki-splash-art {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  min-height: 170px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.647);
+  justify-content: center;
+}
+
+.card-poki-name {
+  align-self: center;
+  position: absolute;
+  top: 192px;
+  background-color: #e0e0e093;
+  padding: 8px;
+  padding-bottom: 3px;
+  border: 1px solid black;
+  border-radius: 20px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+.card-poki-art {
+  right: 0px;
+  position: absolute;
+  top: 30px;
+  object-fit: cover;
+  border-radius: 10px;
+  transform: scale(115%);
+  transform: rotate(5deg);
+}
+
+/* Stats */
+.card-stats-wrapper {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+}
+.card-base-stat-element {
+  background-color: rgb(250, 251, 255);
+  text-align: center;
+  width: 55px;
+  height: 55px;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 100%;
+  border: 1px solid gray;
+}
+.card-base-stat-element p {
+  padding-top: 10px;
+}
+.card-base-stat-element h4 {
+  padding: 0px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/*Changing color*/
+
+.card-pokemon-card[type='normal'] {
+  background-color: rgba(168, 168, 120, 0.9);
+}
+.card-pokemon-card[type='fighting'] {
+  background-color: rgba(192, 48, 40, 0.9);
+}
+.card-pokemon-card[type='flying'] {
+  background-color: rgba(168, 144, 240, 0.9);
+}
+.card-pokemon-card[type='poison'] {
+  background-color: rgba(160, 64, 160, 0.9);
+}
+.card-pokemon-card[type='ground'] {
+  background-color: rgba(224, 192, 104, 0.9);
+}
+.card-pokemon-card[type='rock'] {
+  background-color: rgba(184, 160, 56, 0.9);
+}
+.card-pokemon-card[type='bug'] {
+  background-color: rgba(168, 184, 32, 0.9);
+}
+.card-pokemon-card[type='ghost'] {
+  background-color: rgba(112, 88, 152, 0.9);
+}
+.card-pokemon-card[type='steel'] {
+  background-color: rgba(184, 184, 208, 0.9);
+}
+.card-pokemon-card[type='fire'] {
+  background-color: rgba(240, 128, 48, 0.9);
+}
+.card-pokemon-card[type='water'] {
+  background-color: rgba(104, 144, 240, 0.9);
+}
+.card-pokemon-card[type='grass'] {
+  background-color: rgba(120, 200, 80, 0.9);
+}
+.card-pokemon-card[type='electric'] {
+  background-color: rgba(255, 255, 0, 0.9);
+}
+.card-pokemon-card[type='psychic'] {
+  background-color: rgba(248, 88, 136, 0.9);
+}
+.card-pokemon-card[type='ice'] {
+  background-color: rgba(152, 216, 216, 0.9);
+}
+.card-pokemon-card[type='dragon'] {
+  background-color: rgba(112, 56, 248, 0.9);
+}
+.card-pokemon-card[type='dark'] {
+  background-color: rgba(112, 88, 72, 0.9);
+}
+.card-pokemon-card[type='fairy'] {
+  background-color: rgba(238, 153, 172, 0.9);
+}
+.card-pokemon-card[type='stellar'] {
+  background-color: rgba(105, 90, 180, 0.9);
+}
+.card-pokemon-card[type='unknown'] {
+  background-color: rgba(104, 160, 144, 0.9);
+}

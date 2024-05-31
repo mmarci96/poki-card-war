@@ -1,0 +1,133 @@
+.location-selection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 50vh;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+}
+.game {
+  background-image: url('./bg-images/locations-background.png');
+  background-position: center;
+  background-size: cover;
+  padding: 0;
+}
+.selection-card {
+  background-color: rgba(240, 248, 255, 0.66);
+  min-width: 180px;
+  height: 20vh;
+  min-height: 115px;
+  border: 2px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.location-card-icon {
+  min-height: 60%;
+  height: 75%;
+  border: 2px solid black;
+  background-image: url('./icons/mountain.png');
+  background-position: center;
+  background-size: cover;
+}
+
+.location-card-icon[type='city'] {
+  background-image: url('./icons/city.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='mine'] {
+  background-image: url('./icons/mine.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='forest'] {
+  background-image: url('./icons/forest.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='pokemon-league'] {
+  background-image: url('./icons/arena.png');
+  background-position: center;
+  background-size: cover;
+}
+
+.location-card-icon[type='temple'] {
+  background-image: url('./icons/temple.png');
+  background-position: center;
+  background-position-y: 140px;
+  background-size: cover;
+}
+.location-card-icon[type='path'] {
+  background-image: url('./icons/forest.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='ruins'] {
+  background-image: url('./icons/mine.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='victory-road'] {
+  background-image: url('./icons/road.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='cave'] {
+  background-image: url('./icons/cave.png');
+  background-position: center;
+  background-size: cover;
+}
+.location-card-icon[type='maniac-cave'] {
+  background-image: url('./icons/cave.png');
+  background-position: center;
+  background-size: cover;
+}
+.action-button {
+  animation: wiggle 2s linear 4s infinite;
+}
+.fight-start-now {
+  animation: wiggle 2s linear 4s infinite;
+}
+
+@keyframes wiggle {
+  0%,
+  5% {
+    transform: rotateZ(2deg);
+    -ms-transform-origin-x: 5px;
+  }
+  10% {
+    transform: rotateZ(-6deg);
+    -ms-transform-origin-y: 10px;
+  }
+  14% {
+    transform: rotateZ(8deg);
+    background-color: rgb(255, 91, 91);
+  }
+  20% {
+    transform: rotateZ(-7deg);
+  }
+  24% {
+    transform: rotateZ(5deg);
+  }
+  28% {
+    transform: rotateZ(-3deg);
+  }
+  32% {
+    transform: rotateZ(3deg);
+  }
+  37% {
+    transform: rotateZ(-1deg);
+  }
+  40% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+@media (max-width: 450px) {
+  .scale-80 {
+    transform: scale(0.74);
+  }
+}
