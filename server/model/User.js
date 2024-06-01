@@ -6,7 +6,9 @@ const userSchema = new Schema({
   full_name: String,
   password: String,
   createdAt: Date,
-  updatedAt: Date,
-})
+
+  pokemons:Array,
+  updatedAt: Date
+});
 
 export default model('User', userSchema)
