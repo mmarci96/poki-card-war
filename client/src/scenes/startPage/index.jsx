@@ -25,21 +25,11 @@ const StartPage = ({ player }) => {
   }, [userDetail])
 
   const handleSavePlayerDeck = () => {
-    console.log('hi there')
-    console.log(playerCardDeck)
 
-    const reducedData=[]
-for (const pokemon of playerCardDeck) {
-  reducedData.push({name: pokemon.name, current_health: pokemon.hp, experience: pokemon.experience})
-    //   [{ name: pokemon.name,  
-    //   [{ name: pokemon.name,  })
+    const reducedData = playerCardDeck.map((pokemon) => {
+      return { name: pokemon.name,  current_health : pokemon.hp, experience : pokemon.experience  }
+    })
 
-}
-
-    // const reducedData = playerCardDeck.map((pokemon) => {
-      
-    //   [{ name: pokemon.name,  current_health: pokemon.hp, experience: pokemon.experience  }]
-    // })
     const data = {
       user_id: userDetail.id,
       pokemons: [...reducedData],
