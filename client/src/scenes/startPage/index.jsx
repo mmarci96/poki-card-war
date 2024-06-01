@@ -10,7 +10,7 @@ const StartPage = ({ player }) => {
   const [haveAccount, setHaveAccount] = useState(false)
   const [isDeckReady, setDeckReady] = useState(false)
   const [playerCardDeck, setPlayerCardDeck] = useState([])
-  const [isDeckSaved, setDeckSaved] = useState(false);
+  const [isDeckSaved, setDeckSaved] = useState(false)
 
   if (player) {
     console.log(player)
@@ -27,7 +27,9 @@ const StartPage = ({ player }) => {
   const handleSavePlayerDeck = () => {
     const reducedData = playerCardDeck.map((pokemon) => {
       return
-      { name: pokemon.name, { current_health: pokemon.hp, experience: pokemon.experience } }
+      {
+        name: pokemon.name, { current_health: pokemon.hp, experience: pokemon.experience }
+      }
     })
 
     const data = {

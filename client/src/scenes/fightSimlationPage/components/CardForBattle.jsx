@@ -1,52 +1,42 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import './styles/pokicard.css'
 
-function Pokicard(props) {
-  const { name, scale = 1, onShowDown = () => {}, onClickPicture = () => {}, index } = props
-
-  const url = 'https://pokeapi.co/api/v2/pokemon'
-  const [pokemon, setPokemon] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+const CardForBattle = ({ pokemonName, onSavePokemonData }) => {
+  const [pokemon, setPokemon] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getPokiDetails = async (poki) => {
-      setLoading(true)
-      setError(null)
+    const fetchPokemonData = async () => {
       try {
-        const response = await fetch(`${url}/${poki}`)
-        if (!response.ok) throw new Error('Network response was not ok')
-        const pokiData = await response.json()
-        setPokemon(pokiData)
-        onShowDown(pokiData)
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        const { ok, status } = response;
+        if (!ok) throw new Error(`Network response was not ok, status: ${status}`);
+        const pokemonData = await response.json();
+        setPokemon(pokemonData);
+        onSavePokemonData(pokemonData);
       } catch (err) {
-        setError(err.message)
+        setError(err.message);
       } finally {
-        setLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
 
-    if (name) {
-      getPokiDetails(name)
+    if (pokemonName) {
+      fetchPokemonData();
     }
-  }, [])
+  }, [pokemonName, onSavePokemonData]);
 
-  if (loading) {
-    return <div className='card-pokemon-card'>Loading...</div>
+  if (isLoading) {
+    return <div className='card-pokemon-card'>Loading...</div>;
   }
 
   if (error) {
-    return <div className='card-pokemon-card'>Error loading data</div>
+    return <div className='card-pokemon-card'>Error loading data</div>;
   }
 
   return (
-    <div
-      key={index}
-      className='card-pokemon-card'
-      type={pokemon?.types[0]?.type.name}
-      style={{ transform: `scale(${scale})` }}
-    >
+    <div className='card-pokemon-card' type={pokemon?.types[0]?.type.name}>
       <div className='card-type-name-wrapper'>
         <h4 className='card-type-name'>
           {pokemon?.types[0]?.type.name[0].toUpperCase() + pokemon?.types[0]?.type.name.substring(1)}
@@ -59,7 +49,6 @@ function Pokicard(props) {
             className='card-poki-art cursor-pointer'
             src={pokemon?.sprites.other['official-artwork'].front_default}
             alt={`${pokemon?.name} artwork`}
-            onClick={() => onClickPicture(pokemon?.name)}
           />
           <h3 className='card-poki-name'>{pokemon?.name[0].toUpperCase() + pokemon?.name.substring(1)}</h3>
         </div>
@@ -79,15 +68,12 @@ function Pokicard(props) {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-Pokicard.propTypes = {
+CardForBattle.propTypes = {
   name: PropTypes.string.isRequired,
-  scale: PropTypes.number,
   onSavingPokemonData: PropTypes.func,
-  onShowDown: PropTypes.func,
-  onClickPicture: PropTypes.func,
 }
 
-export default Pokicard
+export default CardForBattle

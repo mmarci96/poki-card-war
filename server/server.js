@@ -3,9 +3,7 @@ import User from './model/User.js'
 import express from 'express'
 import Collection from './model/Collection.js'
 
-mongoose.connect(
-  'mongodb+srv://pokeserver:rattata2@pokecluster.olee5ij.mongodb.net/pokemon-war'
-)
+mongoose.connect('mongodb+srv://pokeserver:rattata2@pokecluster.olee5ij.mongodb.net/pokemon-war')
 
 const app = express()
 
@@ -51,15 +49,11 @@ app.delete('/api/user', async (req, res) => {
   try {
     const result = await User.deleteOne({ userName })
     if (result.deletedCount === 0) {
-      return res
-        .status(404)
-        .json({ succes: false, message: 'User not found' })
+      return res.status(404).json({ succes: false, message: 'User not found' })
     }
     res.json({ success: true, message: `${userName} deleted` })
   } catch (error) {
-    res
-      .status(500)
-      .json({ success: false, message: 'Error deleting user' })
+    res.status(500).json({ success: false, message: 'Error deleting user' })
   }
 })
 
@@ -75,10 +69,9 @@ app.get('/api/user/:userName', async (req, res) => {
   }
 })
 
-
 app.post('/api/collection', async (req, res) => {
   try {
-    const pokemons = req.body.pokemons;
+    const pokemons = req.body.pokemons
     const user_id = req.body.user_id
     console.log(user_id, pokemons)
 
@@ -92,6 +85,5 @@ app.post('/api/collection', async (req, res) => {
     console.error(err)
   }
 })
-
 
 app.listen(4444, () => console.log('Server started on port 4444'))
