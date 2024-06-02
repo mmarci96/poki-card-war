@@ -30,9 +30,9 @@ function App() {
   
 
   return (
-    <div className='main h-[100vh] w-[100vw]'>
+    <>
       <BrowserRouter>
-        <NavigationBar player={player} />
+        <NavigationBar currentPlayer={player} setCurrentPlayer={setPlayer} />
         <Routes>
           <Route path='/' element={<HomePage player={player} />} />
           <Route path='/collection' element={<CollectionPage player={player} />} />
@@ -41,7 +41,7 @@ function App() {
           <Route path='/start' element={<StartPage player={player} />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   )
 }
 

@@ -50,7 +50,7 @@ const StartNew = ({ user, onAddToDeck, onDeckReady }) => {
     }
   }, [completePokiData])
 
-  return <MakeDeck onAddToCollection={setMyCardNow} collection={myCardNow} user={user.player} />
+  return <MakeDeck onAddToCollection={setMyCardNow} collection={myCardNow} user={user.user_name} />
 }
 
 export default StartNew

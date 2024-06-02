@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const HomePage = () => {
   return (
-    <div className='w-full h-full bg-cover bg-center flex flex-col justify-between bg-city-mist pt-[100px]'>
+    <div className='w-full h-[100vh] bg-cover bg-center flex flex-col justify-between bg-city-mist pt-[100px]'>
       <span className=' w-[80ř] ml-[10%] mr[10%] flex justify-center'>
         <h1 className='text-center max-w-[800px] text-6xl tracking-wider h-[32vh] font-bold text-emerald-950 '>
           Some Amazing Content Here!

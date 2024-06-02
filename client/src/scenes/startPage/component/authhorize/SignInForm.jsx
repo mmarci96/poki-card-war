@@ -1,34 +1,29 @@
 import { useState, useEffect } from 'react'
 
-const SignInForm = ({ onSignIn }) => {
-
+const SignInForm = ({ onSignInSuccesfull }) => {
   const [wrongLog, setWrongLog] = useState(false)
   const [userName, setUserName] = useState(null)
-  
 
-  const handleLogIn =  (e) => {
+  const handleLogIn = (e) => {
     e.preventDefault()
     setUserName(e.target[0].value)
   }
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const getUserId = async (url) => {
-      const response = await fetch(url) 
-      const data = await response.json();
-      console.log(data);
-      if(data){
+      const response = await fetch(url)
+      const data = await response.json()
+      if (data) {
         setWrongLog(false)
-        onSignIn({ user_name: userName, user_id: data._id }) 
-      }
-      else {
+        onSignInSuccesfull({ user_name: userName, user_id: data.status._id })
+      } else {
         setWrongLog(true)
       }
     }
-    if(userName){
+    if (userName) {
       getUserId(`/api/user/${userName}`)
     }
-    
-  },[userName])
+  }, [userName])
 
   return (
     <form
@@ -37,11 +32,15 @@ const SignInForm = ({ onSignIn }) => {
     >
       <p className='text-2xl font-semibold'>You have to register to play!</p>
       <div className='flex justify-center m-1 p-2 text-xl'>
-        <label htmlFor='username-input' className='p-1 m-1 text-xl'>Username</label>
+        <label htmlFor='username-input' className='p-1 m-1 text-xl'>
+          Username
+        </label>
         <input id='username-input' className='p-1 m-1 text-xl' type='text' required />
       </div>
       <div className='flex justify-center m-2 p-2 text-xl'>
-        <label htmlFor='password-input' className='p-1 m-1 text-xl'>Password</label>
+        <label htmlFor='password-input' className='p-1 m-1 text-xl'>
+          Password
+        </label>
         <input id='password-input' className='p-1 m-1 text-xl' type='password' required />
       </div>
       <div className='flex justify-center m-2 p-2'>
