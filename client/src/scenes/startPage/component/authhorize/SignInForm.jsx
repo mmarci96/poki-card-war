@@ -18,7 +18,7 @@ const SignInForm = ({ onSignIn }) => {
       console.log(data);
       if(data){
         setWrongLog(false)
-        onSignIn({ user_name: userName, id: data._id }) 
+        onSignIn({ user_name: userName, user_id: data._id }) 
       }
       else {
         setWrongLog(true)

@@ -27,6 +27,7 @@ function App() {
       });
     };
   }, []);
+  
 
   return (
     <div className='main h-[100vh] w-[100vw]'>

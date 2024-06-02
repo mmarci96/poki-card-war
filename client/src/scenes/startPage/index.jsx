@@ -24,6 +24,8 @@ const StartPage = ({ player }) => {
     console.log(userDetail)
   }, [userDetail])
 
+  
+
   const handleSavePlayerDeck = () => {
 
     const reducedData = playerCardDeck.map((pokemon) => {
@@ -31,7 +33,7 @@ const StartPage = ({ player }) => {
     })
 
     const data = {
-      user_id: userDetail.id,
+      user_id: userDetail.user_id,
       pokemons: [...reducedData],
     }
     console.log(data)

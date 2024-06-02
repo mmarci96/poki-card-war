@@ -40,6 +40,8 @@ app.patch('/api/user/deck', async (req, res) => {
   try {
     const user_id = req.body.user_id
     const pokemons = req.body.pokemons
+    console.log(user_id)
+    console.log(pokemons)
 
     const updatedUser = await User.findOneAndUpdate(
     { user_id: user_id },
