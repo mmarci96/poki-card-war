@@ -27,6 +27,10 @@ const StartPage = ({ currentPlayer }) => {
       window.dispatchEvent(new Event('storage'))
       setHasAccount(true)
     }
+    if(!signedInUser) {
+      const currentPlayer = window.localStorage.getItem('playerLog')
+      setSignedInUser(JSON.parse(currentPlayer))
+    }
   }, [signedInUser])
 
   const handleSavePlayerDeck = () => {
