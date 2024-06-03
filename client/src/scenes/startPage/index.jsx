@@ -43,11 +43,7 @@ const StartPage = ({ player, isJustLoggedOut }) => {
     setDeckSaved(true)
   }
 
-  return isJustLoggedOut ? (
-    <div className='start-game bg-city-mist w-full max-h-[100vh] flex flex-col bg-cover bg-center justify-center'>
-      <SuccesLogOut isJustLoggedOut={isJustLoggedOut} />
-    </div>
-  ) : (
+  return (
     <div className='start-game bg-city-mist w-full h-[100vh] flex flex-col bg-cover bg-center justify-center'>
       {!userDetail ? (
         <div className='forms flex justify-center'>

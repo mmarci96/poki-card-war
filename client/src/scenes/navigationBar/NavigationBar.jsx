@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 
-const NavigationBar = ({ currentPlayer, setCurrentPlayer, onLogOut }) => {
+const NavigationBar = ({ currentPlayer, setCurrentPlayer }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = () => {
@@ -10,13 +10,11 @@ const NavigationBar = ({ currentPlayer, setCurrentPlayer, onLogOut }) => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('playerLog')
-    onLogOut(true)
     setCurrentPlayer(null)
     window.location = '/start'
   }
 
   const handleSignUp = () => {
-    onLogOut(false)
     setCurrentPlayer(null)
     window.location = '/start'
   }
