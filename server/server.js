@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import User from './model/User.js'
 import express from 'express'
-import Collection from './model/Collection.js'
 
 mongoose.connect('mongodb+srv://pokeserver:rattata2@pokecluster.olee5ij.mongodb.net/pokemon-war')
 
@@ -36,19 +35,18 @@ app.post('/api/user', async (req, res) => {
   }
 })
 
-app.patch('/api/user/deck', async (req, res) => {
+app.patch('/api/user', async (req, res) => {
   try {
     const user_id = req.body.user_id
     const pokemons = req.body.pokemons
+    const filter = { _id: user_id }
+    const update = { pokemons: [...pokemons] }
+    await User.findOneAndUpdate(filter, update)
+    const doc = await User.findOne({ _id: user_id })
 
-    const updatedUser = await User.findOneAndUpdate(
-      { user_id: user_id },
-      { pokemons: pokemons },
-      { new: true, runValidators: true }
-    )
-    res.status(200).json(updatedUser)
+    res.status(200).json({success:doc})
   } catch (error) {
-    console.log(err)
+    console.log(error)
     res.status(500).json({ message: 'unlucky' })
   }
 })
@@ -78,22 +76,5 @@ app.get('/api/user/:userName', async (req, res) => {
   }
 })
 
-app.post('/api/collection', async (req, res) => {
-  try {
-    const pokemons = req.body.pokemons
-    const user_id = req.body.user_id
-
-    const collection = new Collection({
-      user_id: user_id,
-      pokemons: pokemons,
-      createdAt: new Date(),
-    })
-    collection.save()
-    res.status(200).json({ status: 'deck saved' })
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ status: 'something went wrong...' })
-  }
-})
 
 app.listen(4444, () => console.log('Server started on port 4444'))

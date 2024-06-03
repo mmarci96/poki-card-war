@@ -12,6 +12,15 @@ const StartPage = ({ player, isJustLoggedOut }) => {
   const [playerCardDeck, setPlayerCardDeck] = useState([])
   const [isDeckSaved, setDeckSaved] = useState(false)
 
+  const savePlayerDeckOnServer = async(payerUpdate) => {
+    const response = await fetch('/api/user', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payerUpdate),
+    })
+    await response.json()
+  }
+
   useEffect(() => {
     if (userDetail) {
       localStorage.setItem('playerLog', JSON.stringify(userDetail))
@@ -24,25 +33,14 @@ const StartPage = ({ player, isJustLoggedOut }) => {
     const reducedData = playerCardDeck.map((pokemon) => {
       return { name: pokemon.name, current_health: pokemon.hp, experience: pokemon.experience }
     })
-
     const data = {
+      user_name: userDetail.user_name,
       user_id: userDetail.user_id,
       pokemons: [...reducedData],
     }
-    console.log(data)
-    fetch('/api/user/deck', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setDeckSaved(true)
-        console.log(response)
-    })
+    savePlayerDeckOnServer(data)
 
-    
-    
+    setDeckSaved(true)
   }
 
   return isJustLoggedOut ? (
@@ -88,7 +86,10 @@ const StartPage = ({ player, isJustLoggedOut }) => {
               </button>
             </Link>
           )}
-          <button className='cancel-btn text-xl w-[12vw] min-w-[72px] bg-red-400 border-black border hover:bg-red-600 p-1 m-1 text-amber-50 max-h-[40px] min-h-[36px] rounded-2xl'>
+          <button onClick={() => {
+            setDeckReady(false)
+            setDeckSaved(false)
+            }}  className='cancel-btn text-xl w-[12vw] min-w-[72px] bg-red-400 border-black border hover:bg-red-600 p-1 m-1 text-amber-50 max-h-[40px] min-h-[36px] rounded-2xl'>
             Edit Deck
           </button>
         </div>

@@ -13,6 +13,8 @@ const SignInForm = ({ onSignInSuccesfull }) => {
     const getUserId = async (url) => {
       const response = await fetch(url)
       const data = await response.json()
+
+      console.log(data)
       if (data) {
         setWrongLog(false)
         onSignInSuccesfull({ user_name: userName, user_id: data.status._id })
