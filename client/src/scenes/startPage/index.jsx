@@ -64,7 +64,7 @@ const StartPage = ({ player, isJustLoggedOut }) => {
           addedToDeck={playerCardDeck}
         />
       ) : (
-        <div className='ml-auto mr-auto flex flex-col'>
+        <div className='ml-auto mr-auto flex flex-col max-h-[500px]'>
           <h2 className='text-2xl p-2 m-1 bg-base rounded-2xl text-center max-w-[45vw] ml-auto mr-auto'>
             You have your deck ready to play!
           </h2>
