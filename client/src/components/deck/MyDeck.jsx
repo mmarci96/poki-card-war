@@ -10,7 +10,7 @@ const MyDeck = ({ onChoosingPoki, onSetMyDeck, myDeck }) => {
       {myDeck &&
         myDeck.map((poki, index) => (
           <div key={index}>
-            <MyPokiCard data={poki}  onClickPicture={onChoosingPoki} />
+            <MyPokiCard data={poki} onClickPicture={onChoosingPoki} />
             <button onClick={() => handleDelete(poki.name)}></button>
           </div>
         ))}

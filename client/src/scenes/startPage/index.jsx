@@ -5,57 +5,57 @@ import SignInForm from './component/authhorize/SignInForm'
 import { Link } from 'react-router-dom'
 import MyDeck from '../../components/deck/MyDeck'
 
-const StartPage = ({ player, isJustLoggedOut }) => {
-  const [userDetail, setUserDetail] = useState(player)
-  const [haveAccount, setHaveAccount] = useState(false)
+const StartPage = ({ currentPlayer }) => {
+  const [signedInUser, setSignedInUser] = useState(currentPlayer)
+  const [hasAccount, setHasAccount] = useState(false)
   const [isDeckReady, setDeckReady] = useState(false)
   const [playerCardDeck, setPlayerCardDeck] = useState([])
   const [isDeckSaved, setDeckSaved] = useState(false)
 
-  const savePlayerDeckOnServer = async(payerUpdate) => {
+  const savePlayerDeckOnServer = async(playerUpdate) => {
     const response = await fetch('/api/user', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payerUpdate),
+      body: JSON.stringify(playerUpdate),
     })
     await response.json()
   }
 
   useEffect(() => {
-    if (userDetail) {
-      localStorage.setItem('playerLog', JSON.stringify(userDetail))
+    if (signedInUser) {
+      localStorage.setItem('playerLog', JSON.stringify(signedInUser))
       window.dispatchEvent(new Event('storage'))
-      setHaveAccount(true)
+      setHasAccount(true)
     }
-  }, [userDetail])
+  }, [signedInUser])
 
   const handleSavePlayerDeck = () => {
     const reducedData = playerCardDeck.map((pokemon) => {
       return { name: pokemon.name, current_health: pokemon.hp, experience: pokemon.experience }
     })
-    const data = {
-      user_name: userDetail.user_name,
-      user_id: userDetail.user_id,
+    const updatedPlayer = {
+      user_name: signedInUser.user_name,
+      user_id: signedInUser.user_id,
       pokemons: [...reducedData],
     }
-    savePlayerDeckOnServer(data)
+    savePlayerDeckOnServer(updatedPlayer)
 
     setDeckSaved(true)
   }
 
   return (
     <div className='start-game bg-city-mist w-full h-[100vh] flex flex-col bg-cover bg-center justify-center'>
-      {!userDetail ? (
+      {!signedInUser ? (
         <div className='forms flex justify-center'>
-          {haveAccount ? (
-            <SignInForm onSignInSuccesfull={setUserDetail} />
+          {hasAccount ? (
+            <SignInForm onSignInSuccesfull={setSignedInUser} /> 
           ) : (
-            <RegisterForm onSingUpSuccesfull={setUserDetail} onHaveAccount={setHaveAccount} />
+            <RegisterForm onSingUpSuccesfull={setSignedInUser} onHasAccount={setHasAccount} /> 
           )}
         </div>
       ) : !isDeckReady ? (
         <StartNew
-          user={userDetail}
+          user={signedInUser}
           onAddToDeck={setPlayerCardDeck}
           onDeckReady={setDeckReady}
           addedToDeck={playerCardDeck}
@@ -66,7 +66,7 @@ const StartPage = ({ player, isJustLoggedOut }) => {
             You have your deck ready to play!
           </h2>
           <div>
-            <MyDeck myDeck={playerCardDeck} onSetMyDeck={setPlayerCardDeck} />
+            <MyDeck myDeck={playerCardDeck} onSetMyDeck={setPlayerCardDeck} /> 
           </div>
           {!isDeckSaved ? (
             <button

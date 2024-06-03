@@ -1,6 +1,6 @@
 
 
-const RegisterForm = ({ onSingUpSuccesfull, onHaveAccount, isLogged }) => {
+const RegisterForm = ({ onSingUpSuccesfull, onHasAccount, isLogged }) => {
   
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -22,7 +22,7 @@ const RegisterForm = ({ onSingUpSuccesfull, onHaveAccount, isLogged }) => {
         } else {
           onSingUpSuccesfull({ user_name: userName, id: response._id })
           console.log(response)
-          onHaveAccount(true)
+          onHasAccount(true)
         }
       })
   }
@@ -53,7 +53,7 @@ const RegisterForm = ({ onSingUpSuccesfull, onHaveAccount, isLogged }) => {
       </div>
       <p className='text-xl'>
         If you already have an account registed{' '}
-        <span onClick={() => onHaveAccount(true)} className='link text-indigo-800 font-semibold cursor-pointer'>
+        <span onClick={() => onHasAccount(true)} className='link text-indigo-800 font-semibold cursor-pointer'>
           here
         </span>
         !
