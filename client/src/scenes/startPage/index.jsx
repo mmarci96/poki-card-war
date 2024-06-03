@@ -5,7 +5,7 @@ import SignInForm from './component/authhorize/SignInForm'
 import { Link } from 'react-router-dom'
 import MyDeck from '../../components/deck/MyDeck'
 
-const StartPage = ({ player }) => {
+const StartPage = ({ player, isJustLoggedOut }) => {
   const [userDetail, setUserDetail] = useState(player)
   const [haveAccount, setHaveAccount] = useState(false)
   const [isDeckReady, setDeckReady] = useState(false)
@@ -42,12 +42,19 @@ const StartPage = ({ player }) => {
       })
   }
 
-  return (
+  return isJustLoggedOut ? (
     <div className='start-game bg-city-mist w-full max-h-[100vh] flex flex-col bg-cover bg-center justify-center'>
+      <SuccesLogOut isJustLoggedOut={isJustLoggedOut} />
+    </div>
+  ) : (
+    <div className='start-game bg-city-mist w-full h-[100vh] flex flex-col bg-cover bg-center justify-center'>
       {!userDetail ? (
         <div className='forms flex justify-center'>
-          {haveAccount ? <SignInForm onSignInSuccesfull={setUserDetail} /> :
-          <RegisterForm onSingUpSuccesfull={setUserDetail} onHaveAccount={setHaveAccount} />}
+          {haveAccount ? (
+            <SignInForm onSignInSuccesfull={setUserDetail} />
+          ) : (
+            <RegisterForm onSingUpSuccesfull={setUserDetail} onHaveAccount={setHaveAccount} />
+          )}
         </div>
       ) : !isDeckReady ? (
         <StartNew

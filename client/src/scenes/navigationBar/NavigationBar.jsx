@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 
-const NavigationBar = ({ currentPlayer, setCurrentPlayer }) => {
+const NavigationBar = ({ currentPlayer, setCurrentPlayer, onLogOut }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = () => {
@@ -10,7 +10,15 @@ const NavigationBar = ({ currentPlayer, setCurrentPlayer }) => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('playerLog')
+    onLogOut(true)
     setCurrentPlayer(null)
+    window.location = '/start'
+  }
+
+  const handleSignUp = () => {
+    onLogOut(false)
+    setCurrentPlayer(null)
+    window.location = '/start'
   }
 
   return (
@@ -30,9 +38,9 @@ const NavigationBar = ({ currentPlayer, setCurrentPlayer }) => {
             </button>
           </div>
         ) : (
-          <Link to='/start'>
-            <button className='btn-main h-[16px] p-1 text-l m-auto mt-2'>Sign up</button>
-          </Link>
+          
+            <button className='btn-main h-[16px] p-1 text-l m-auto mt-2' onClick={handleSignUp}>Sign up</button>
+          
         )}
       </span>
       <div className='drop-down-menu relative ml-8 m-8 mt-2'>

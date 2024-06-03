@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [player, setPlayer] = useState(null);
+  const [isJustLoggedOut, setJustLoggedOut] = useState(false)
+
   useEffect(() => {
     if(window.localStorage.getItem('playerLog')){
      const localStorageData = JSON.parse(window.localStorage.getItem('playerLog'))
@@ -32,13 +34,13 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavigationBar currentPlayer={player} setCurrentPlayer={setPlayer} />
+        <NavigationBar currentPlayer={player} setCurrentPlayer={setPlayer} onLogOut={setJustLoggedOut}/>
         <Routes>
           <Route path='/' element={<HomePage player={player} />} />
           <Route path='/collection' element={<CollectionPage player={player} />} />
           <Route path='/play' element={<GamePage player={player} />} />
           <Route path='/pokecodex' element={<PokecodexPage />} />
-          <Route path='/start' element={<StartPage player={player} />} />
+          <Route path='/start' element={<StartPage player={player} isJustLoggedOut={isJustLoggedOut}/>} />
         </Routes>
       </BrowserRouter>
     </>
