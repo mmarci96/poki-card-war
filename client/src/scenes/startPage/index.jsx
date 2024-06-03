@@ -39,7 +39,10 @@ const StartPage = ({ player, isJustLoggedOut }) => {
       .then((response) => {
         setDeckSaved(true)
         console.log(response)
-      })
+    })
+
+    
+    
   }
 
   return isJustLoggedOut ? (
