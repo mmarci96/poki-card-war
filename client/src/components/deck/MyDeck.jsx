@@ -6,11 +6,11 @@ const MyDeck = ({ onChoosingPoki, onSetMyDeck, myDeck }) => {
     onSetMyDeck(removePoki)
   }
   return (
-    <div className='flex overflow-y-scroll bg-white bg-opacity-40 border h-[60vh] border-black rounded-xl min-w-[600px] max-w-[100%] w-[1110px] '>
+    <div className='flex overflow-y-scroll bg-white bg-opacity-40 border h-[320px] border-black rounded-xl min-w-[600px] max-w-[70vw]'>
       {myDeck &&
         myDeck.map((poki, index) => (
           <div key={index}>
-            <MyPokiCard data={poki}  onClickPicture={onChoosingPoki} />
+            <MyPokiCard data={poki} onClickPicture={onChoosingPoki} />
             <button onClick={() => handleDelete(poki.name)}></button>
           </div>
         ))}
