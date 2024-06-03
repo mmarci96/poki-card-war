@@ -15,7 +15,6 @@ app.post('/api/user', async (req, res) => {
   const full_name = req.body.full_name
   const user_name = req.body.user_name
   const password = req.body.password
-  // const pokemons_url = `/api/collection/${user_name.toLowerCase()}`
   const pokemons=[]
   const createdAt = Date.now()
   const userCheck = await User.findOne({ user_name: user_name })
@@ -45,7 +44,6 @@ app.patch('/api/user/deck', async (req, res) => {
     { user_id: user_id },
     {pokemons: pokemons},
     { new: true, runValidators: true })
-    console.log(updatedUser)
   } catch (error) {
     console.log(err)
     res.status(500).json({ message: 'unlucky' })
@@ -86,7 +84,6 @@ app.post('/api/collection', async (req, res) => {
   try {
     const pokemons = req.body.pokemons;
     const user_id = req.body.user_id
-    console.log(user_id, pokemons)
 
     const collection = new Collection({
       user_id: user_id,

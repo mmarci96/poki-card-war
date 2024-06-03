@@ -5,33 +5,28 @@ import SignInForm from './component/authhorize/SignInForm'
 import { Link } from 'react-router-dom'
 import MyDeck from '../../components/deck/MyDeck'
 
-const StartPage = ({ player }) => {
+const StartPage = ({ player, isJustLoggedOut }) => {
   const [userDetail, setUserDetail] = useState(player)
   const [haveAccount, setHaveAccount] = useState(false)
   const [isDeckReady, setDeckReady] = useState(false)
   const [playerCardDeck, setPlayerCardDeck] = useState([])
-  const [isDeckSaved, setDeckSaved] = useState(false);
-
-  if (player) {
-    console.log(player)
-  }
+  const [isDeckSaved, setDeckSaved] = useState(false)
 
   useEffect(() => {
     if (userDetail) {
       localStorage.setItem('playerLog', JSON.stringify(userDetail))
       window.dispatchEvent(new Event('storage'))
+      setHaveAccount(true)
     }
-    console.log(userDetail)
   }, [userDetail])
 
   const handleSavePlayerDeck = () => {
-
     const reducedData = playerCardDeck.map((pokemon) => {
-      return { name: pokemon.name,  current_health : pokemon.hp, experience : pokemon.experience  }
+      return { name: pokemon.name, current_health: pokemon.hp, experience: pokemon.experience }
     })
 
     const data = {
-      user_id: userDetail.id,
+      user_id: userDetail.user_id,
       pokemons: [...reducedData],
     }
     console.log(data)
@@ -47,9 +42,21 @@ const StartPage = ({ player }) => {
       })
   }
 
-  return (
-    <div className='start-game bg-city-mist w-full h-full flex flex-col bg-cover bg-center justify-center'>
-      {!isDeckReady && userDetail ? (
+  return isJustLoggedOut ? (
+    <div className='start-game bg-city-mist w-full max-h-[100vh] flex flex-col bg-cover bg-center justify-center'>
+      <SuccesLogOut isJustLoggedOut={isJustLoggedOut} />
+    </div>
+  ) : (
+    <div className='start-game bg-city-mist w-full h-[100vh] flex flex-col bg-cover bg-center justify-center'>
+      {!userDetail ? (
+        <div className='forms flex justify-center'>
+          {haveAccount ? (
+            <SignInForm onSignInSuccesfull={setUserDetail} />
+          ) : (
+            <RegisterForm onSingUpSuccesfull={setUserDetail} onHaveAccount={setHaveAccount} />
+          )}
+        </div>
+      ) : !isDeckReady ? (
         <StartNew
           user={userDetail}
           onAddToDeck={setPlayerCardDeck}
@@ -57,16 +64,7 @@ const StartPage = ({ player }) => {
           addedToDeck={playerCardDeck}
         />
       ) : (
-        <div className='forms flex justify-center'>
-          {!userDetail && haveAccount ? (
-            <SignInForm onSignIn={setUserDetail} onHaveAccount={setHaveAccount} />
-          ) : (
-            <RegisterForm onSingUpSuccesfull={setUserDetail} onHaveAccount={setHaveAccount} />
-          )}
-        </div>
-      )}
-      {isDeckReady && (
-        <div className='start-page-ready mt-[20vh] ml-auto mr-auto mb-auto flex-col'>
+        <div className='ml-auto mr-auto flex flex-col'>
           <h2 className='text-2xl p-2 m-1 bg-base rounded-2xl text-center max-w-[45vw] ml-auto mr-auto'>
             You have your deck ready to play!
           </h2>
